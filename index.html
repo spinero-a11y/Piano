@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Piano Virtual</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Panel de Control -->
+        <div class="controls">
+            <label>Volumen: <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5"></label>
+            <label><input type="checkbox" id="sustain"> Modo Sustain (Eco)</label>
+            <label>Color del Piano: <input type="color" id="pianoColor" value="#222222"></label>
+        </div>
+
+        <!-- El Piano -->
+        <div id="piano" class="piano-box">
+            <!-- Ejemplo de algunas teclas (aquí se pueden generar más con JS) -->
+            <div class="key white" data-note="C4" data-key="a">Do <br><small>A</small></div>
+            <div class="key black" data-note="C#4" data-key="w"></div>
+            <div class="key white" data-note="D4" data-key="s">Re <br><small>S</small></div>
+            <div class="key black" data-note="D#4" data-key="e"></div>
+            <div class="key white" data-note="E4" data-key="d">Mi <br><small>D</small></div>
+        </div>
+    </div>
+
+    <!-- Librería de audio Tone.js (ideal para instrumentos virtuales) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
