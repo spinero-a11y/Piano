@@ -2,30 +2,50 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Mi Piano Virtual</title>
+    <title>Piano Virtual Profesional</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div id="app">
-        <!-- Panel de Control -->
-        <div class="controls">
-            <label>Volumen: <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5"></label>
-            <label><input type="checkbox" id="sustain"> Modo Sustain (Eco)</label>
-            <label>Color del Piano: <input type="color" id="pianoColor" value="#222222"></label>
+<body id="page-body">
+    <div class="app-container">
+        <!-- Panel de Control Superior -->
+        <div class="control-panel">
+            <div class="control-group">
+                <label>🔊 Volumen</label>
+                <input type="range" id="volume" min="0" max="1" step="0.05" value="0.5">
+            </div>
+
+            <div class="control-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="sustain"> 
+                    <span>🎹 Modo Sustain (Eco)</span>
+                </label>
+            </div>
+
+            <div class="control-group">
+                <label>🎨 Color de Fondo</label>
+                <input type="color" id="bgColorPicker" value="#1a1a2e">
+            </div>
+
+            <div class="control-group">
+                <label>⌨️ Guía de Teclas</label>
+                <select id="labelMode">
+                    <option value="notes">Notas (Do, Re, Mi)</option>
+                    <option value="abc">Cifrado (A, B, C)</option>
+                    <option value="qwerty">Teclado PC (QWERTY)</option>
+                </select>
+            </div>
         </div>
 
-        <!-- El Piano -->
-        <div id="piano" class="piano-box">
-            <!-- Ejemplo de algunas teclas (aquí se pueden generar más con JS) -->
-            <div class="key white" data-note="C4" data-key="a">Do <br><small>A</small></div>
-            <div class="key black" data-note="C#4" data-key="w"></div>
-            <div class="key white" data-note="D4" data-key="s">Re <br><small>S</small></div>
-            <div class="key black" data-note="D#4" data-key="e"></div>
-            <div class="key white" data-note="E4" data-key="d">Mi <br><small>D</small></div>
+        <!-- Estructura del Piano Realista -->
+        <div class="piano-case" id="pianoCase">
+            <div class="piano-brand">SYNTH & KEYS</div>
+            <div class="keyboard" id="keyboard">
+                <!-- Las teclas se generarán automáticamente desde JavaScript para que sean muchas más -->
+            </div>
         </div>
     </div>
 
-    <!-- Librería de audio Tone.js (ideal para instrumentos virtuales) -->
+    <!-- Librería de audio Tone.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <script src="script.js"></script>
 </body>
