@@ -1,25 +1,45 @@
 // 1. Configurar sintetizador
 const synth = new Tone.Synth().toDestination();
 
-// 2. Definir las notas del piano con sus respectivas opciones de nombres y teclas de ordenador (QWERTY)
+// 2. Definir una lista mucho más larga de notas (múltiples octavas) con sus teclas de ordenador (QWERTY)
 const pianoKeys = [
-    { note: "C4", type: "white", noteName: "Do", abc: "C", qwerty: "a" },
-    { note: "C#4", type: "black", noteName: "Do#", abc: "C#", qwerty: "w" },
-    { note: "D4", type: "white", noteName: "Re", abc: "D", qwerty: "s" },
-    { note: "D#4", type: "black", noteName: "Re#", abc: "D#", qwerty: "e" },
-    { note: "E4", type: "white", noteName: "Mi", abc: "E", qwerty: "d" },
-    { note: "F4", type: "white", noteName: "Fa", abc: "F", qwerty: "f" },
-    { note: "F#4", type: "black", noteName: "Fa#", abc: "F#", qwerty: "t" },
-    { note: "G4", type: "white", noteName: "Sol", abc: "G", qwerty: "g" },
-    { note: "G#4", type: "black", noteName: "Sol#", abc: "G#", qwerty: "y" },
-    { note: "A4", type: "white", noteName: "La", abc: "A", qwerty: "h" },
-    { note: "A#4", type: "black", noteName: "La#", abc: "A#", qwerty: "u" },
-    { note: "B4", type: "white", noteName: "Si", abc: "B", qwerty: "j" },
-    { note: "C5", type: "white", noteName: "Do (5)", abc: "C5", qwerty: "k" },
-    { note: "C#5", type: "black", noteName: "Do#5", abc: "C#5", qwerty: "o" },
-    { note: "D5", type: "white", noteName: "Re (5)", abc: "D5", qwerty: "l" },
-    { note: "D#5", type: "black", noteName: "Re#5", abc: "D#5", qwerty: "p" },
-    { note: "E5", type: "white", noteName: "Mi (5)", abc: "E5", qwerty: "ñ" }
+    // Octava 3
+    { note: "C3", type: "white", noteName: "Do 3", abc: "C3", qwerty: "z" },
+    { note: "C#3", type: "black", noteName: "Do#3", abc: "C#3", qwerty: "s" },
+    { note: "D3", type: "white", noteName: "Re 3", abc: "D3", qwerty: "x" },
+    { note: "D#3", type: "black", noteName: "Re#3", abc: "D#3", qwerty: "d" },
+    { note: "E3", type: "white", noteName: "Mi 3", abc: "E3", qwerty: "c" },
+    { note: "F3", type: "white", noteName: "Fa 3", abc: "F3", qwerty: "v" },
+    { note: "F#3", type: "black", noteName: "Fa#3", abc: "F#3", qwerty: "g" },
+    { note: "G3", type: "white", noteName: "Sol 3", abc: "G3", qwerty: "b" },
+    { note: "G#3", type: "black", noteName: "Sol#3", abc: "G#3", qwerty: "h" },
+    { note: "A3", type: "white", noteName: "La 3", abc: "A3", qwerty: "n" },
+    { note: "A#3", type: "black", noteName: "La#3", abc: "A#3", qwerty: "j" },
+    { note: "B3", type: "white", noteName: "Si 3", abc: "B3", qwerty: "m" },
+    
+    // Octava 4 (Zona central del teclado del ordenador)
+    { note: "C4", type: "white", noteName: "Do", abc: "C", qwerty: "q" },
+    { note: "C#4", type: "black", noteName: "Do#", abc: "C#", qwerty: "2" },
+    { note: "D4", type: "white", noteName: "Re", abc: "D", qwerty: "w" },
+    { note: "D#4", type: "black", noteName: "Re#", abc: "D#", qwerty: "3" },
+    { note: "E4", type: "white", noteName: "Mi", abc: "E", qwerty: "e" },
+    { note: "F4", type: "white", noteName: "Fa", abc: "F", qwerty: "r" },
+    { note: "F#4", type: "black", noteName: "Fa#", abc: "F#", qwerty: "5" },
+    { note: "G4", type: "white", noteName: "Sol", abc: "G", qwerty: "t" },
+    { note: "G#4", type: "black", noteName: "Sol#", abc: "G#", qwerty: "6" },
+    { note: "A4", type: "white", noteName: "La", abc: "A", qwerty: "y" },
+    { note: "A#4", type: "black", noteName: "La#", abc: "A#", qwerty: "7" },
+    { note: "B4", type: "white", noteName: "Si", abc: "B", qwerty: "u" },
+
+    // Octava 5
+    { note: "C5", type: "white", noteName: "Do 5", abc: "C5", qwerty: "i" },
+    { note: "C#5", type: "black", noteName: "Do#5", abc: "C#5", qwerty: "9" },
+    { note: "D5", type: "white", noteName: "Re 5", abc: "D5", qwerty: "o" },
+    { note: "D#5", type: "black", noteName: "Re#5", abc: "D#5", qwerty: "0" },
+    { note: "E5", type: "white", noteName: "Mi 5", abc: "E5", qwerty: "p" },
+    { note: "F5", type: "white", noteName: "Fa 5", abc: "F5", qwerty: "[" },
+    { note: "F#5", type: "black", noteName: "Fa#5", abc: "F#5", qwerty: "=" },
+    { note: "G5", type: "white", noteName: "Sol 5", abc: "G5", qwerty: "]" }
 ];
 
 const keyboardElement = document.getElementById('keyboard');
@@ -35,21 +55,17 @@ function buildKeyboard() {
         keyDiv.setAttribute('data-note', k.note);
         keyDiv.setAttribute('data-qwerty', k.qwerty);
 
-        // Posicionar correctamente las teclas negras encima de las blancas
+        // Posicionar correctamente las teclas blancas y negras en fila continua
         if (k.type === 'white') {
             whiteKeyIndex++;
             keyDiv.style.left = `${(whiteKeyIndex - 1) * 44}px`;
         } else {
-            // Ajustar posición de la tecla negra entre las blancas
             keyDiv.style.left = `${(whiteKeyIndex * 44) - 13}px`;
         }
 
-        // Crear etiqueta de texto inicial (Notas por defecto)
-        updateKeyLabel(keyDiv, k, 'notes');
+        updateKeyLabel(keyDiv, k, document.getElementById('labelMode').value);
 
-        // Evento de clic con ratón o táctil
         keyDiv.addEventListener('mousedown', () => playNote(k.note, keyDiv));
-
         keyboardElement.appendChild(keyDiv);
     });
 }
@@ -85,9 +101,9 @@ function playNote(note, keyElement) {
     const isSustain = document.getElementById('sustain').checked;
 
     if (isSustain) {
-        synth.triggerAttackRelease(note, "1n"); // Suena durante más tiempo (eco/sustain)
+        synth.triggerAttackRelease(note, "1n"); // Eco / Sostenido largo
     } else {
-        synth.triggerAttackRelease(note, "8n"); // Nota corta normal
+        synth.triggerAttackRelease(note, "8n"); // Nota corta
     }
 
     if (keyElement) {
@@ -113,7 +129,7 @@ window.addEventListener('keydown', (e) => {
 
     if (targetKey) {
         const note = targetKey.getAttribute('data-note');
-        playNote(note, targetKey);
+        playNodeAction = playNote(note, targetKey);
     }
 });
 
