@@ -1,9 +1,9 @@
 // 1. Configurar sintetizador
 const synth = new Tone.Synth().toDestination();
 
-// 2. Definición exacta de las teclas con el mapeo del teclado de tu imagen (números y letras secuenciales)
+// 2. Mapeo exacto de teclas idéntico a tu referencia visual (del 1 al 0 y de la a a la z)
 const pianoKeys = [
-    // Octava izquierda (Teclas blancas con números del 1 al 7 y negras con símbolos)
+    // Primera sección: Números y símbolos superiores
     { note: "C3", type: "white", noteName: "Do 3", abc: "C3", qwerty: "1" },
     { note: "C#3", type: "black", noteName: "Do#3", abc: "C#3", qwerty: "!" },
     { note: "D3", type: "white", noteName: "Re 3", abc: "D3", qwerty: "2" },
@@ -13,47 +13,49 @@ const pianoKeys = [
     { note: "F#3", type: "black", noteName: "Fa#3", abc: "F#3", qwerty: "$" },
     { note: "G3", type: "white", noteName: "Sol 3", abc: "G3", qwerty: "5" },
     { note: "G#3", type: "black", noteName: "Sol#3", abc: "G#3", qwerty: "%" },
-    { note: "A3", type: "white", noteName: "La 3", abc: "A3", qwerty: "6" },
-    { note: "A#3", type: "black", noteName: "La#3", abc: "A#3", qwerty: "^" },
-    { note: "B3", type: "white", noteName: "Si 3", abc: "B3", qwerty: "7" },
+    { note: "A3", type: "white", noteName: "La 3", abc: "A3", qwerty: "^" },
+    { note: "A#3", type: "black", noteName: "La#3", abc: "A#3", qwerty: "*" },
+    { note: "B3", type: "white", noteName: "Si 3", abc: "B3", qwerty: "(" },
 
-    // Octava central (Teclas blancas con números 8, 9, 0 y letras Q, W, E, R, T, Y...)
-    { note: "C4", type: "white", noteName: "Do", abc: "C", qwerty: "8" },
-    { note: "C#4", type: "black", noteName: "Do#", abc: "C#", qwerty: "*" },
-    { note: "D4", type: "white", noteName: "Re", abc: "D", qwerty: "9" },
-    { note: "D#4", type: "black", noteName: "Re#", abc: "D#", qwerty: "(" },
-    { note: "E4", type: "white", noteName: "Mi", abc: "E", qwerty: "0" },
-    { note: "F4", type: "white", noteName: "Fa", abc: "F", qwerty: "q" },
-    { note: "F#4", type: "black", noteName: "Fa#", abc: "F#", qwerty: "Q" },
-    { note: "G4", type: "white", noteName: "Sol", abc: "G", qwerty: "w" },
-    { note: "G#4", type: "black", noteName: "Sol#", abc: "G#", qwerty: "W" },
-    { note: "A4", type: "white", noteName: "La", abc: "A", qwerty: "e" },
-    { note: "A#4", type: "black", noteName: "La#", abc: "A#", qwerty: "E" },
-    { note: "B4", type: "white", noteName: "Si", abc: "B", qwerty: "r" },
+    // Segunda sección: Letras QWERTY principales
+    { note: "C4", type: "white", noteName: "Do", abc: "C", qwerty: "q" },
+    { note: "C#4", type: "black", noteName: "Do#", abc: "C#", qwerty: "Q" },
+    { note: "D4", type: "white", noteName: "Re", abc: "D", qwerty: "w" },
+    { note: "D#4", type: "black", noteName: "Re#", abc: "D#", qwerty: "W" },
+    { note: "E4", type: "white", noteName: "Mi", abc: "E", qwerty: "e" },
+    { note: "F4", type: "white", noteName: "Fa", abc: "F", qwerty: "t" },
+    { note: "F#4", type: "black", noteName: "Fa#", abc: "F#", qwerty: "T" },
+    { note: "G4", type: "white", noteName: "Sol", abc: "G", qwerty: "y" },
+    { note: "G#4", type: "black", noteName: "Sol#", abc: "G#", qwerty: "Y" },
+    { note: "A4", type: "white", noteName: "La", abc: "A", qwerty: "i" },
+    { note: "A#4", type: "black", noteName: "La#", abc: "A#", qwerty: "I" },
+    { note: "B4", type: "white", noteName: "Si", abc: "B", qwerty: "o" },
 
-    // Octava derecha (Continuación de letras: t, y, u, i, o, p, s, d, f, g, h, j, k, l, z, x, c, v, b, n, m)
-    { note: "C5", type: "white", noteName: "Do 5", abc: "C5", qwerty: "t" },
-    { note: "C#5", type: "black", noteName: "Do#5", abc: "C#5", qwerty: "T" },
-    { note: "D5", type: "white", noteName: "Re 5", abc: "D5", qwerty: "y" },
-    { note: "D#5", type: "black", noteName: "Re#5", abc: "D#5", qwerty: "Y" },
-    { note: "E5", type: "white", noteName: "Mi 5", abc: "E5", qwerty: "u" },
-    { note: "F5", type: "white", noteName: "Fa 5", abc: "F5", qwerty: "i" },
-    { note: "F#5", type: "black", noteName: "Fa#5", abc: "F#5", qwerty: "I" },
-    { note: "G5", type: "white", noteName: "Sol 5", abc: "G5", qwerty: "o" },
-    { note: "G#5", type: "black", noteName: "Sol#5", abc: "G#5", qwerty: "O" },
-    { note: "A5", type: "white", noteName: "La 5", abc: "A5", qwerty: "p" },
-    { note: "A#5", type: "black", noteName: "La#5", abc: "A#5", qwerty: "P" },
-    { note: "B5", type: "white", noteName: "Si 5", abc: "B5", qwerty: "a" },
+    // Tercera sección: Continuación de letras (P, S, D, G, H, J, L, Z...)
+    { note: "C5", type: "white", noteName: "Do 5", abc: "C5", qwerty: "p" },
+    { note: "C#5", type: "black", noteName: "Do#5", abc: "C#5", qwerty: "P" },
+    { note: "D5", type: "white", noteName: "Re 5", abc: "D5", qwerty: "s" },
+    { note: "D#5", type: "black", noteName: "Re#5", abc: "D#5", qwerty: "S" },
+    { note: "E5", type: "white", noteName: "Mi 5", abc: "E5", qwerty: "d" },
+    { note: "F5", type: "white", noteName: "Fa 5", abc: "F5", qwerty: "g" },
+    { note: "F#5", type: "black", noteName: "Fa#5", abc: "F#5", qwerty: "G" },
+    { note: "G5", type: "white", noteName: "Sol 5", abc: "G5", qwerty: "h" },
+    { note: "G#5", type: "black", noteName: "Sol#5", abc: "G#5", qwerty: "H" },
+    { note: "A5", type: "white", noteName: "La 5", abc: "A5", qwerty: "j" },
+    { note: "A#5", type: "black", noteName: "La#5", abc: "A#5", qwerty: "J" },
+    { note: "B5", type: "white", noteName: "Si 5", abc: "B5", qwerty: "l" },
 
-    // Extremo agudo
-    { note: "C6", type: "white", noteName: "Do 6", abc: "C6", qwerty: "s" },
-    { note: "C#6", type: "black", noteName: "Do#6", abc: "C#6", qwerty: "S" },
-    { note: "D6", type: "white", noteName: "Re 6", abc: "D6", qwerty: "d" },
-    { note: "D#6", type: "black", noteName: "Re#6", abc: "D#6", qwerty: "D" },
-    { note: "E6", type: "white", noteName: "Mi 6", abc: "E6", qwerty: "f" },
-    { note: "F6", type: "white", noteName: "Fa 6", abc: "F6", qwerty: "g" },
-    { note: "F#6", type: "black", noteName: "Fa#6", abc: "F#6", qwerty: "G" },
-    { note: "G6", type: "white", noteName: "Sol 6", abc: "G6", qwerty: "h" }
+    // Cuarta sección: Tramo final con Z, X, C, V, B, N, M
+    { note: "C6", type: "white", noteName: "Do 6", abc: "C6", qwerty: "z" },
+    { note: "C#6", type: "black", noteName: "Do#6", abc: "C#6", qwerty: "Z" },
+    { note: "D6", type: "white", noteName: "Re 6", abc: "D6", qwerty: "c" },
+    { note: "D#6", type: "black", noteName: "Re#6", abc: "D#6", qwerty: "C" },
+    { note: "E6", type: "white", noteName: "Mi 6", abc: "E6", qwerty: "v" },
+    { note: "F6", type: "white", noteName: "Fa 6", abc: "F6", qwerty: "b" },
+    { note: "F#6", type: "black", noteName: "Fa#6", abc: "F#6", qwerty: "B" },
+    { note: "G6", type: "white", noteName: "Sol 6", abc: "G6", qwerty: "n" },
+    { note: "G#6", type: "black", noteName: "Sol#6", abc: "G#6", qwerty: "N" },
+    { note: "A6", type: "white", noteName: "La 6", abc: "A6", qwerty: "m" }
 ];
 
 const keyboardElement = document.getElementById('keyboard');
@@ -67,7 +69,7 @@ function buildKeyboard() {
         const keyDiv = document.createElement('div');
         keyDiv.classList.add('key', k.type);
         keyDiv.setAttribute('data-note', k.note);
-        keyDiv.setAttribute('data-qwerty', k.qwerty.toLowerCase());
+        keyDiv.setAttribute('data-qwerty', k.qwerty);
 
         if (k.type === 'white') {
             whiteKeyIndex++;
